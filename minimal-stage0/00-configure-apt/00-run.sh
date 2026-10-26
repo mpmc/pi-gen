@@ -21,6 +21,8 @@ else
 fi
 
 install -m 644 files/raspberrypi-archive-keyring.pgp "${ROOTFS_DIR}/usr/share/keyrings/"
+install -m 644 files/99-install-options "${ROOTFS_DIR}/etc/apt/apt.conf.d/99-install-options"
+
 on_chroot <<- \EOF
 	ARCH="$(dpkg --print-architecture)"
 	if [ "$ARCH" = "armhf" ]; then
