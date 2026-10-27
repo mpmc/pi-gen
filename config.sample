@@ -1,0 +1,17 @@
+# To build minimal image.
+#echo 'IMG_SUFFIX="-lite"' > minimal-stage1/EXPORT_IMAGE
+# sudo bash ./build.sh
+
+IMG_NAME="minpi"
+RELEASE="trixie"
+LOCALE_DEFAULT="en_GB.UTF-8"
+TARGET_HOSTNAME="pi"
+KEYBOARD_KEYMAP="gb"
+TIMEZONE_DEFAULT="Europe/London"
+FIRST_USER_NAME="pi"
+FIRST_USER_PASS="raspberry"                 # your password
+ENABLE_SSH=1
+#PUBKEY_SSH_FIRST_USER="ssh-rsa ..."   # your public key for SSH
+STAGE_LIST="minimal-stage0 minimal-stage1"
+EXPORT_CONFIG_DIR="minimal-export-image"
+DEPLOY_COMPRESSION="none"
