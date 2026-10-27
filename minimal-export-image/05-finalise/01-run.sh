@@ -15,8 +15,11 @@ on_chroot <<- EOF
 		python3 -m apt_listchanges.populate_database --profile apt
 		systemctl disable apt-listchanges.timer
 	fi
-	install -m 755 -o systemd-timesync -g systemd-timesync -d /var/lib/systemd/timesync
-	install -m 644 -o systemd-timesync -g systemd-timesync /dev/null /var/lib/systemd/timesync/clock
+
+	if dpkg-query -W -f='\${Status}' systemd-timesyncd 2>/dev/null | grep -q 'install ok installed'; then
+		install -m 755 -o systemd-timesync -g systemd-timesync -d /var/lib/systemd/timesync
+		install -m 644 -o systemd-timesync -g systemd-timesync /dev/null /var/lib/systemd/timesync/clock
+	fi
 EOF
 
 if [ -f "${ROOTFS_DIR}/etc/initramfs-tools/update-initramfs.conf" ]; then
